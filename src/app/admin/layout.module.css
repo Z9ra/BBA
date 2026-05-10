@@ -1,0 +1,25 @@
+.adminContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.mainContent {
+  flex: 1;
+  margin-left: 250px; /* Offset for sidebar */
+  padding: 2rem 3rem;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .adminContainer {
+    flex-direction: column;
+  }
+  
+  .mainContent {
+    margin-left: 0;
+    padding: 1.5rem;
+    margin-top: 60px; /* Space for mobile header if needed */
+  }
+}
