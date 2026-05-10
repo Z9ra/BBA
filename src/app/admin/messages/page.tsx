@@ -27,7 +27,7 @@ export default async function MessagesPage() {
         </div>
       ) : (
         <div className={styles.listContainer} style={{ gap: '1rem' }}>
-          {messages.map((msg) => (
+          {messages.map((msg: any) => (
             <div
               key={msg.id}
               className={styles.card}
