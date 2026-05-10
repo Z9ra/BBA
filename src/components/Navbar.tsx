@@ -29,7 +29,7 @@ export default function Navbar({ logoUrl = '/logo.png' }: { logoUrl?: string }) 
           <Link href="#services" onClick={() => setMobileMenuOpen(false)}>Layanan</Link>
           <Link href="#portfolio" onClick={() => setMobileMenuOpen(false)}>Portofolio</Link>
           <Link href="#segments" onClick={() => setMobileMenuOpen(false)}>Segmen</Link>
-          <Link href="#contact" className="btn btn-primary" onClick={() => setMobileMenuOpen(false)}>
+          <Link href="https://api.whatsapp.com/send/?phone=6282127772205" className="btn btn-primary" onClick={() => setMobileMenuOpen(false)}>
             Hubungi Kami
           </Link>
         </div>

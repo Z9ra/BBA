@@ -23,7 +23,7 @@ export default function Footer() {
           </ul>
         </div>
         
-        <div className={styles.contact}>
+        {/* <div className={styles.contact}>
           <h4 className={styles.heading}>Hubungi Kami</h4>
           <address className={styles.address}>
             DUSUN DARONGDONG RT./RW. 01/08 DESA BUAHDUA,<br />
@@ -34,7 +34,7 @@ export default function Footer() {
             <p><strong>WA:</strong> <a href="https://wa.me/6282127772205" target="_blank" rel="noopener noreferrer">0821-2777-2205</a></p>
             <p><strong>Email:</strong> <a href="mailto:pt.bersamaberdikariabadi@gmail.com">pt.bersamaberdikariabadi@gmail.com</a></p>
           </div>
-        </div>
+        </div> */}
       </div>
       
       <div className={styles.copyright}>

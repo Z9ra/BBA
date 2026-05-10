@@ -70,7 +70,7 @@ export default async function Home() {
               </p>
               <div className={styles.heroActions}>
                 <a href="#services" className="btn btn-primary">Lihat Layanan</a>
-                <a href="#contact" className="btn btn-outline">Konsultasi Gratis</a>
+                <a href="https://api.whatsapp.com/send/?phone=6282127772205" className="btn btn-outline">Konsultasi Gratis</a>
               </div>
             </div>
             <div className={styles.heroImageColumn}>
@@ -312,15 +312,20 @@ export default async function Home() {
                 <div className={styles.contactDetails}>
                   <div className={styles.contactItem}>
                     <span className={styles.contactIcon}><i className="bi bi-geo-alt-fill"></i></span>
-                    <span>Indonesia</span>
-                  </div>
-                  <div className={styles.contactItem}>
-                    <span className={styles.contactIcon}><i className="bi bi-envelope-fill"></i></span>
-                    <span>info@bba-solutions.com</span>
+                    <span>DUSUN DARONGDONG RT./RW. 01/08 DESA BUAHDUA,<br />
+                      KEC. BUAHDUA, KAB. SUMEDANG, JAWA BARAT 45392</span>
                   </div>
                   <div className={styles.contactItem}>
                     <span className={styles.contactIcon}><i className="bi bi-telephone-fill"></i></span>
-                    <span>+62 812 xxxx xxxx</span>
+                    <span>(0261) 2142579</span>
+                  </div>
+                  <div className={styles.contactItem}>
+                    <span className={styles.contactIcon}><i className="bi bi-envelope-fill"></i></span>
+                    <span>pt.bersamaberdikariabadi@gmail.com</span>
+                  </div>
+                  <div className={styles.contactItem}>
+                    <span className={styles.contactIcon}><i className="bi bi-telephone-fill"></i></span>
+                    <span>0821-2777-2205</span>
                   </div>
                 </div>
               </div>
