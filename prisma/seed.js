@@ -51,6 +51,39 @@ async function main() {
     });
   }
 
+  // Create default projects
+  const projects = [
+    {
+      name: 'ERP System PT. Maju Jaya',
+      category: 'Software Development',
+      client: 'PT. Maju Jaya',
+      imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop',
+      status: 'Completed',
+    },
+    {
+      name: 'Network Infrastructure Setup',
+      category: 'Networking',
+      client: 'Rumah Sakit Sehat',
+      imageUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop',
+      status: 'Completed',
+    },
+    {
+      name: 'Company Profile Website',
+      category: 'Web Development',
+      client: 'Z9 Digital Solutions',
+      imageUrl: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&auto=format&fit=crop',
+      status: 'Completed',
+    },
+  ];
+
+  for (const project of projects) {
+    await prisma.project.upsert({
+      where: { id: projects.indexOf(project) + 1 }, // Simple ID logic for seed
+      update: project,
+      create: project,
+    });
+  }
+
   console.log('Seed completed successfully');
 }
 

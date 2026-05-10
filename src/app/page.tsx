@@ -33,38 +33,64 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const settings = await getSettings();
-  const [approvedReviews, completedProjects] = await Promise.all([
+  const [approvedReviews, completedProjects, customSections] = await Promise.all([
     prisma.review.findMany({
       where: { status: 'Approved' },
       take: 3,
       orderBy: { createdAt: 'desc' },
     }),
     prisma.project.findMany({
-      where: { status: 'Completed' },
-      take: 6,
       orderBy: { createdAt: 'desc' },
+    }),
+    prisma.customSection.findMany({
+      orderBy: { createdAt: 'asc' },
     }),
   ]);
 
   return (
     <>
-      <Navbar />
+      <Navbar logoUrl={settings.logoUrl} />
 
       <main className={styles.main}>
         {/* HERO SECTION */}
         <section className={`${styles.hero} animate-fade-in`} id="home">
-          <div className={`container ${styles.heroContainer}`}>
-            <h1 className={styles.heroTitle}>
-              SOLUSI <span className="accent">TEKNOLOGI</span>
-              <br />
-              UNTUK BISNIS ANDA
-            </h1>
-            <p className={styles.heroSubtitle}>
-              {settings.heroSubtitle}
-            </p>
-            <div className={styles.heroActions}>
-              <a href="#services" className="btn btn-primary">Lihat Layanan</a>
-              <a href="#contact" className="btn btn-outline">Konsultasi Gratis</a>
+          <div className={`container ${styles.heroGrid}`}>
+            <div className={styles.heroContent}>
+              <h1 className={styles.heroTitle}>
+                {settings.heroTitle.split(' ').map((word, i, arr) => (
+                  <span key={i}>
+                    {word === 'TEKNOLOGI' ? <span className="accent">TEKNOLOGI</span> : word}
+                    {i < arr.length - 1 ? ' ' : ''}
+                    {i === 1 ? <br /> : ''}
+                  </span>
+                ))}
+              </h1>
+              <p className={styles.heroSubtitle}>
+                {settings.heroSubtitle}
+              </p>
+              <div className={styles.heroActions}>
+                <a href="#services" className="btn btn-primary">Lihat Layanan</a>
+                <a href="#contact" className="btn btn-outline">Konsultasi Gratis</a>
+              </div>
+            </div>
+            <div className={styles.heroImageColumn}>
+              {settings.heroImageUrl ? (
+                <div className={styles.heroIllustration}>
+                  <Image 
+                    src={settings.heroImageUrl} 
+                    alt="Hero Illustration" 
+                    width={600} 
+                    height={600} 
+                    priority
+                    className={styles.heroImg}
+                  />
+                </div>
+              ) : (
+                <div className={styles.heroPlaceholder}>
+                  {/* Generic Tech Illustration if no image */}
+                  <i className="bi bi-cpu" style={{ fontSize: '10rem', opacity: 0.2 }}></i>
+                </div>
+              )}
             </div>
           </div>
           <div className={styles.heroBackground}></div>
@@ -82,9 +108,21 @@ export default async function Home() {
                 </p>
               </div>
               <div className={styles.aboutImage}>
-                <div className={styles.imagePlaceholder}>
-                  <span>Inovasi &amp; Integritas</span>
-                </div>
+                {settings.aboutImageUrl ? (
+                  <div className={styles.aboutImageWrapper}>
+                    <Image 
+                      src={settings.aboutImageUrl} 
+                      alt="About PT. BBA" 
+                      width={600} 
+                      height={400} 
+                      className={styles.dynamicImage}
+                    />
+                  </div>
+                ) : (
+                  <div className={styles.imagePlaceholder}>
+                    <span>Inovasi &amp; Integritas</span>
+                  </div>
+                )}
               </div>
             </div>
           </RevealOnScroll>
@@ -145,31 +183,31 @@ export default async function Home() {
               </p>
               <div className={styles.servicesGrid}>
                 {completedProjects.map((project) => (
-                  <div key={project.id} className={styles.serviceCard}>
-                    <div className={styles.serviceIcon} style={{ fontSize: '1rem', opacity: 0.6 }}>
-                      {project.category}
-                    </div>
-                    <h3>{project.name}</h3>
-                    {project.client && (
-                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                        Klien: {project.client}
-                      </p>
+                  <div key={project.id} className={styles.projectCard}>
+                    {project.imageUrl ? (
+                      <div className={styles.projectImageWrapper}>
+                        <Image 
+                          src={project.imageUrl} 
+                          alt={project.name} 
+                          fill
+                          className={styles.projectImage}
+                        />
+                      </div>
+                    ) : (
+                      <div className={styles.projectImagePlaceholder}>
+                        <i className="bi bi-image"></i>
+                      </div>
                     )}
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        marginTop: '0.5rem',
-                        padding: '0.2rem 0.75rem',
-                        background: 'rgba(0, 200, 83, 0.15)',
-                        color: '#00c853',
-                        borderRadius: '999px',
-                        fontSize: '0.8rem',
-                        fontWeight: 600,
-                      }}
-                    >
-                      <i className="bi bi-patch-check-fill" style={{ marginRight: '0.4rem' }}></i>
-                      Selesai
-                    </span>
+                    <div className={styles.projectContent}>
+                      <div className={styles.projectCategory}>{project.category}</div>
+                      <h3>{project.name}</h3>
+                      {project.client && (
+                        <p className={styles.projectClient}>Klien: {project.client}</p>
+                      )}
+                      <div className={styles.projectStatus}>
+                        <i className="bi bi-patch-check-fill"></i> Selesai
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -201,6 +239,40 @@ export default async function Home() {
             </div>
           </RevealOnScroll>
         </section>
+
+        {/* CUSTOM SECTIONS */}
+        {customSections.map((section, index) => (
+          <section 
+            key={section.id} 
+            className={`section ${index % 2 === 0 ? 'glass' : ''}`}
+          >
+            <RevealOnScroll className="container">
+              <div className={styles.aboutGrid} style={{ direction: index % 2 === 0 ? 'ltr' : 'rtl' }}>
+                <div className={styles.aboutContent} style={{ direction: 'ltr' }}>
+                  <h2 className={styles.sectionTitle}>{section.title}</h2>
+                  <div className={styles.customContent}>
+                    {section.content.split('\n').map((para, i) => (
+                      <p key={i}>{para}</p>
+                    ))}
+                  </div>
+                </div>
+                {section.imageUrl && (
+                  <div className={styles.aboutImage}>
+                    <div className={styles.aboutImageWrapper}>
+                      <Image 
+                        src={section.imageUrl} 
+                        alt={section.title} 
+                        width={600} 
+                        height={400} 
+                        className={styles.dynamicImage}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </RevealOnScroll>
+          </section>
+        ))}
 
         {/* TESTIMONIALS / REVIEWS SECTION */}
         {approvedReviews.length > 0 && (

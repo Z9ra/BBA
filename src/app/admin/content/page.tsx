@@ -1,11 +1,16 @@
 import styles from '../admin.module.css';
+import prisma from '@/lib/prisma';
 import AppearanceForm from './AppearanceForm';
 import TextContentForm from './TextContentForm';
+import StaticImagesForm from './StaticImagesForm';
 import DynamicContentForm from './DynamicContentForm';
 import { getSettings } from '@/lib/settings';
 
 export default async function EditContentPage() {
   const settings = await getSettings();
+  const customSections = await prisma.customSection.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
 
   return (
     <div className={styles.container}>
@@ -20,35 +25,11 @@ export default async function EditContentPage() {
       {/* Text Content */}
       <TextContentForm initialSettings={settings} />
 
-      {/* Image Web Content (Mockup for now as it needs complex mapping) */}
-      <div className={styles.card}>
-        <div className={styles.cardHeader}>
-          <h2>Image Web Content</h2>
-        </div>
-        <p className={styles.subtitle} style={{ marginBottom: '1.5rem' }}>
-          Update the static images used in various sections of the website.
-        </p>
-        <form className={styles.form} style={{ border: 'none', padding: 0, background: 'transparent' }}>
-          <div className={styles.formGroup}>
-            <label htmlFor="heroImage">Hero Section Image / Illustration</label>
-            <input type="file" id="heroImage" accept="image/*" />
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Current: default-hero.jpg</span>
-          </div>
+      {/* Static Images (Hero & About) */}
+      <StaticImagesForm initialSettings={settings} />
 
-          <div className={styles.formGroup}>
-            <label htmlFor="aboutImage">About Us Image</label>
-            <input type="file" id="aboutImage" accept="image/*" />
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Current: about-company.png</span>
-          </div>
-
-          <button type="button" className={`btn btn-primary ${styles.submitBtn}`}>
-            Upload Images
-          </button>
-        </form>
-      </div>
-
-      {/* Add New Custom Content */}
-      <DynamicContentForm />
+      {/* Custom Sections */}
+      <DynamicContentForm initialSections={customSections} />
 
     </div>
   );

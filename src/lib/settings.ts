@@ -7,6 +7,9 @@ export interface AppSettings {
   heroTitle: string;
   heroSubtitle: string;
   aboutText: string;
+  heroImageUrl: string;
+  aboutImageUrl: string;
+  logoUrl: string;
 }
 
 const defaultSettings: AppSettings = {
@@ -16,6 +19,9 @@ const defaultSettings: AppSettings = {
   heroTitle: 'SOLUSI TEKNOLOGI UNTUK BISNIS ANDA',
   heroSubtitle: 'Membangun infrastruktur digital yang kuat, aman, dan efisien melalui perangkat lunak kustom dan integrasi jaringan terbaik.',
   aboutText: 'PT. Bersama Berdikari Abadi menyediakan layanan pengembangan perangkat lunak dan aplikasi profesional, menghadirkan alat digital seperti aplikasi seluler dan situs web melalui proses konsultasi, pengkodean, dan pengujian kualitas yang ketat.',
+  heroImageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop',
+  aboutImageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop',
+  logoUrl: '/logo.png',
 };
 
 export async function getSettings(): Promise<AppSettings> {

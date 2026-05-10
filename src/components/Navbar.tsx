@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Navbar.module.css';
 
-export default function Navbar() {
+export default function Navbar({ logoUrl = '/logo.png' }: { logoUrl?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -21,12 +21,13 @@ export default function Navbar() {
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`container ${styles.navContainer}`}>
         <Link href="/" className={styles.logo}>
-          <Image src="/logo.png" alt="PT. BBA Logo" className={styles.logoImage} width={120} height={40} priority />
+          <Image src={logoUrl} alt="PT. BBA Logo" className={styles.logoImage} width={120} height={40} priority />
         </Link>
         
         <div className={`${styles.navLinks} ${mobileMenuOpen ? styles.open : ''}`}>
           <Link href="#about" onClick={() => setMobileMenuOpen(false)}>Tentang Kami</Link>
           <Link href="#services" onClick={() => setMobileMenuOpen(false)}>Layanan</Link>
+          <Link href="#portfolio" onClick={() => setMobileMenuOpen(false)}>Portofolio</Link>
           <Link href="#segments" onClick={() => setMobileMenuOpen(false)}>Segmen</Link>
           <Link href="#contact" className="btn btn-primary" onClick={() => setMobileMenuOpen(false)}>
             Hubungi Kami
