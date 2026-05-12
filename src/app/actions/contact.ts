@@ -1,6 +1,7 @@
 'use server';
 
 import prisma from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
 
 export async function submitContact(prevState: { error?: string; success?: string } | null, formData: FormData) {
   const name = (formData.get('name') as string)?.trim();
@@ -22,6 +23,9 @@ export async function submitContact(prevState: { error?: string; success?: strin
     await prisma.contactMessage.create({
       data: { name, email, phone: phone || null, message },
     });
+
+    revalidatePath('/admin');
+    revalidatePath('/admin/messages');
 
     return { success: 'Pesan Anda berhasil terkirim! Kami akan segera menghubungi Anda.' };
   } catch (error) {

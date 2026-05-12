@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styles from './admin.module.css';
 import prisma from '@/lib/prisma';
 import { getSettings } from '@/lib/settings';
+export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboard() {
   // Fetch real stats

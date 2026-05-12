@@ -1,6 +1,7 @@
 import styles from '../admin.module.css';
 import prisma from '@/lib/prisma';
 import MessagesList from './MessagesList';
+export const dynamic = 'force-dynamic';
 
 export default async function MessagesPage() {
   const messages = await prisma.contactMessage.findMany({
