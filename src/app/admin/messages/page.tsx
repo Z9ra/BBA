@@ -7,7 +7,7 @@ export default async function MessagesPage() {
     orderBy: { createdAt: 'desc' },
   });
 
-  const unreadCount = messages.filter((m) => !m.isRead).length;
+  const unreadCount = messages.filter((m: any) => !m.isRead).length;
 
   return (
     <div className={styles.container}>
