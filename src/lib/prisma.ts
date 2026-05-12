@@ -3,11 +3,11 @@ import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 
 const prismaClientSingleton = () => {
   const adapter = new PrismaMariaDb({
-    host: 'localhost',
-    user: 'bba_app',
-    password: 'Sitamvan07!',
-    database: 'bba_db',
-    port: 3306,
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'bba_app',
+    password: process.env.DB_PASSWORD || 'Sitamvan07!',
+    database: process.env.DB_NAME || 'bba_db',
+    port: parseInt(process.env.DB_PORT || '3306'),
     connectionLimit: 5
   });
 
