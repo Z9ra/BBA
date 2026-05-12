@@ -76,11 +76,11 @@ export default async function Home() {
             <div className={styles.heroImageColumn}>
               {settings.heroImageUrl ? (
                 <div className={styles.heroIllustration}>
-                  <Image 
-                    src={settings.heroImageUrl} 
-                    alt="Hero Illustration" 
-                    width={600} 
-                    height={600} 
+                  <Image
+                    src={settings.heroImageUrl}
+                    alt="Hero Illustration"
+                    width={600}
+                    height={600}
                     priority
                     className={styles.heroImg}
                   />
@@ -110,11 +110,11 @@ export default async function Home() {
               <div className={styles.aboutImage}>
                 {settings.aboutImageUrl ? (
                   <div className={styles.aboutImageWrapper}>
-                    <Image 
-                      src={settings.aboutImageUrl} 
-                      alt="About PT. BBA" 
-                      width={600} 
-                      height={400} 
+                    <Image
+                      src={settings.aboutImageUrl}
+                      alt="About PT. BBA"
+                      width={600}
+                      height={400}
                       className={styles.dynamicImage}
                     />
                   </div>
@@ -186,9 +186,9 @@ export default async function Home() {
                   <div key={project.id} className={styles.projectCard}>
                     {project.imageUrl ? (
                       <div className={styles.projectImageWrapper}>
-                        <Image 
-                          src={project.imageUrl} 
-                          alt={project.name} 
+                        <Image
+                          src={project.imageUrl}
+                          alt={project.name}
                           fill
                           className={styles.projectImage}
                         />
@@ -242,8 +242,8 @@ export default async function Home() {
 
         {/* CUSTOM SECTIONS */}
         {customSections.map((section, index) => (
-          <section 
-            key={section.id} 
+          <section
+            key={section.id}
             className={`section ${index % 2 === 0 ? 'glass' : ''}`}
           >
             <RevealOnScroll className="container">
@@ -259,11 +259,11 @@ export default async function Home() {
                 {section.imageUrl && (
                   <div className={styles.aboutImage}>
                     <div className={styles.aboutImageWrapper}>
-                      <Image 
-                        src={section.imageUrl} 
-                        alt={section.title} 
-                        width={600} 
-                        height={400} 
+                      <Image
+                        src={section.imageUrl}
+                        alt={section.title}
+                        width={600}
+                        height={400}
                         className={styles.dynamicImage}
                       />
                     </div>

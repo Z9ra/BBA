@@ -49,7 +49,7 @@ export async function addProject(formData: FormData) {
     await prisma.project.create({
       data: { name, category, client, status, imageUrl }
     });
-    
+
     revalidatePath('/admin/projects');
     revalidatePath('/');
     return { success: true };
@@ -78,7 +78,7 @@ export async function updateProject(id: number, formData: FormData) {
       where: { id },
       data: { name, category, client, status, imageUrl }
     });
-    
+
     revalidatePath('/admin/projects');
     revalidatePath('/');
     return { success: true };

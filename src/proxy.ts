@@ -6,7 +6,7 @@ export function proxy(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/admin')) {
     // Check for the admin_auth cookie
     const authCookie = request.cookies.get('admin_auth');
-    
+
     // If no cookie, redirect to login page
     if (!authCookie || authCookie.value !== 'true') {
       return NextResponse.redirect(new URL('/login', request.url));

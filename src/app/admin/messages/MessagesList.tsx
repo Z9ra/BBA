@@ -34,7 +34,7 @@ export default function MessagesList({ initialMessages }: { initialMessages: Mes
 
   const executeDelete = async () => {
     if (!confirmDeleteId) return;
-    
+
     startTransition(async () => {
       try {
         const res = await deleteMessage(confirmDeleteId);
@@ -90,9 +90,9 @@ export default function MessagesList({ initialMessages }: { initialMessages: Mes
               <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginRight: '1rem' }}>
                 {new Date(msg.createdAt).toLocaleString('id-ID')}
               </span>
-              
+
               {!msg.isRead && (
-                <button 
+                <button
                   onClick={() => handleMarkAsRead(msg.id)}
                   className={styles.actionBtn}
                   title="Tandai sudah dibaca"
@@ -102,7 +102,7 @@ export default function MessagesList({ initialMessages }: { initialMessages: Mes
                 </button>
               )}
 
-              <button 
+              <button
                 onClick={() => handleDeleteClick(msg.id)}
                 className={`${styles.actionBtn} ${styles.delete}`}
                 title="Hapus pesan"
@@ -112,7 +112,7 @@ export default function MessagesList({ initialMessages }: { initialMessages: Mes
               </button>
 
               {confirmDeleteId === msg.id && (
-                <button 
+                <button
                   onClick={executeDelete}
                   className="btn btn-primary"
                   style={{ padding: '0.2rem 0.5rem', fontSize: '0.8rem' }}
@@ -133,7 +133,7 @@ export default function MessagesList({ initialMessages }: { initialMessages: Mes
               </span>
             )}
           </div>
-          
+
           <p
             style={{
               color: 'var(--text-secondary)',

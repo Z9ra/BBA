@@ -23,7 +23,7 @@ export default function Navbar({ logoUrl = '/logo.png' }: { logoUrl?: string }) 
         <Link href="/" className={styles.logo}>
           <Image src={logoUrl} alt="PT. BBA Logo" className={styles.logoImage} width={120} height={40} priority />
         </Link>
-        
+
         <div className={`${styles.navLinks} ${mobileMenuOpen ? styles.open : ''}`}>
           <Link href="#about" onClick={() => setMobileMenuOpen(false)}>Tentang Kami</Link>
           <Link href="#services" onClick={() => setMobileMenuOpen(false)}>Layanan</Link>
@@ -34,8 +34,8 @@ export default function Navbar({ logoUrl = '/logo.png' }: { logoUrl?: string }) 
           </Link>
         </div>
 
-        <button 
-          className={styles.mobileToggle} 
+        <button
+          className={styles.mobileToggle}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >

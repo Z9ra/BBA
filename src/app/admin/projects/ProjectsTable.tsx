@@ -34,7 +34,7 @@ export default function ProjectsTable({ initialProjects }: ProjectsTableProps) {
 
   const executeDelete = async () => {
     if (!confirmDeleteId) return;
-    
+
     startTransition(async () => {
       try {
         console.log('Deleting project:', confirmDeleteId);
@@ -74,9 +74,9 @@ export default function ProjectsTable({ initialProjects }: ProjectsTableProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     const formData = new FormData(e.currentTarget);
-    
+
     try {
       let res;
       if (editingProject) {
@@ -84,7 +84,7 @@ export default function ProjectsTable({ initialProjects }: ProjectsTableProps) {
       } else {
         res = await addProject(formData);
       }
-      
+
       if (res?.error) {
         alert(res.error);
       } else {
@@ -121,7 +121,7 @@ export default function ProjectsTable({ initialProjects }: ProjectsTableProps) {
               <td>{project.category}</td>
               <td>{project.client || '-'}</td>
               <td>
-                <span 
+                <span
                   className={`${styles.badge} ${project.status === 'Completed' ? styles.success : styles.warning}`}
                   style={{ cursor: 'pointer' }}
                   onClick={() => handleStatusToggle(project.id, project.status)}
@@ -131,7 +131,7 @@ export default function ProjectsTable({ initialProjects }: ProjectsTableProps) {
               </td>
               <td style={{ display: 'flex', gap: '0.5rem' }}>
                 <button className={styles.actionBtn} onClick={() => handleOpenEdit(project)}>Edit</button>
-                <button 
+                <button
                   className={`${styles.actionBtn} ${styles.delete}`}
                   onClick={() => handleDelete(project.id)}
                   disabled={isPending}
@@ -139,8 +139,8 @@ export default function ProjectsTable({ initialProjects }: ProjectsTableProps) {
                   {confirmDeleteId === project.id ? 'Confirm?' : 'Delete'}
                 </button>
                 {confirmDeleteId === project.id && (
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={executeDelete}
                     className="btn btn-primary"
                     style={{ padding: '0.2rem 0.5rem', fontSize: '0.8rem' }}
@@ -194,9 +194,9 @@ export default function ProjectsTable({ initialProjects }: ProjectsTableProps) {
               </div>
 
               <div className={styles.modalActions}>
-                <button 
-                  type="button" 
-                  className="btn btn-outline" 
+                <button
+                  type="button"
+                  className="btn btn-outline"
                   onClick={() => setIsModalOpen(false)}
                 >
                   Cancel
