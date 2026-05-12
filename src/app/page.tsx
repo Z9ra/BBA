@@ -7,6 +7,7 @@ import ContactForm from '@/components/ContactForm';
 import styles from './page.module.css';
 import { getSettings } from '@/lib/settings';
 import prisma from '@/lib/prisma';
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
