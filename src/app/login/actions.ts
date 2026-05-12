@@ -31,7 +31,7 @@ export async function login(prevState: { error?: string } | null, formData: Form
   const cookieStore = await cookies();
   cookieStore.set('admin_auth', 'true', {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: false, // Set to false to allow session on HTTP (local IP)
     sameSite: 'strict',
     maxAge: 60 * 60 * 24 * 7, // 1 week
     path: '/',

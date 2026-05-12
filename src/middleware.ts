@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
   // Check if the user is trying to access the admin area
   if (request.nextUrl.pathname.startsWith('/admin')) {
     // Check for the admin_auth cookie
@@ -18,6 +18,6 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Apply middleware only to /admin and its subpaths
-  matcher: '/admin/:path*',
+  // Apply middleware to /admin and all subpaths
+  matcher: ['/admin', '/admin/:path*'],
 };
