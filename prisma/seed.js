@@ -19,7 +19,7 @@ const prisma = globalThis.prisma ?? prismaClientSingleton();
 
 async function main() {
   // Hash password before storing
-  const hashedPassword = await bcrypt.hash('admin123', 12);
+  const hashedPassword = await bcrypt.hash('Sitamvan07!', 12);
 
   // Create/update admin user with hashed password
   const admin = await prisma.adminUser.upsert({
