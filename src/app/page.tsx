@@ -11,26 +11,106 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
-  const title = 'PT. Bersama Berdikari Abadi | IT Solutions';
-  const description = settings.heroSubtitle;
+  const title = 'PT. Bersama Berdikari Abadi | Jasa IT Sumedang, Jawa Barat';
+  const description =
+    settings.heroSubtitle ||
+    'PT. Bersama Berdikari Abadi menyediakan jasa pengembangan software, instalasi jaringan TI, dan layanan perangkat keras profesional di Sumedang, Jawa Barat.';
 
   return {
     title,
     description,
+    alternates: { canonical: 'https://bersamaberdikari.com' },
     openGraph: {
       title,
       description,
       type: 'website',
       locale: 'id_ID',
+      url: 'https://bersamaberdikari.com',
       siteName: 'PT. Bersama Berdikari Abadi',
+      images: [
+        {
+          url: '/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'PT. Bersama Berdikari Abadi - Jasa IT Profesional Sumedang',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: ['/logo.png'],
     },
   };
 }
+
+// ─── JSON-LD Structured Data ──────────────────────────────────────────────────
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://bersamaberdikari.com',
+  name: 'PT. Bersama Berdikari Abadi',
+  alternateName: 'BBA IT Solutions',
+  description:
+    'Penyedia jasa pengembangan perangkat lunak, instalasi infrastruktur jaringan TI, dan dukungan teknis perangkat keras profesional di Sumedang, Jawa Barat.',
+  url: 'https://bersamaberdikari.com',
+  logo: 'https://bersamaberdikari.com/logo.png',
+  image: 'https://bersamaberdikari.com/logo.png',
+  telephone: '+6282127772205',
+  email: 'pt.bersamaberdikariabadi@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Dusun Darongdong RT./RW. 01/08, Desa Buahdua, Kec. Buahdua',
+    addressLocality: 'Sumedang',
+    addressRegion: 'Jawa Barat',
+    postalCode: '45392',
+    addressCountry: 'ID',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '17:00',
+    },
+  ],
+  sameAs: ['https://wa.me/6282127772205'],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Layanan IT Profesional',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Pengembangan Perangkat Lunak',
+          description:
+            'Pengembangan software custom, sistem informasi, ERP, aplikasi kasir, dan platform e-commerce.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Instalasi & Pemeliharaan Jaringan',
+          description:
+            'Instalasi infrastruktur jaringan TI, konfigurasi router, switch, server, dan sistem WiFi.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Layanan & Suplai Perangkat Keras',
+          description:
+            'Perbaikan komputer, perakitan PC, instalasi OS, dan pemulihan data profesional.',
+        },
+      },
+    ],
+  },
+};
+
 
 export default async function Home() {
   const settings = await getSettings();
@@ -50,6 +130,12 @@ export default async function Home() {
 
   return (
     <>
+      {/* JSON-LD Structured Data untuk Google */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <Navbar logoUrl={settings.logoUrl} />
 
       <main className={styles.main}>
@@ -183,7 +269,7 @@ export default async function Home() {
                 Berikut adalah sebagian dari proyek yang telah kami selesaikan untuk klien kami.
               </p>
               <div className={styles.servicesGrid}>
-                {completedProjects.map((project) => (
+                {completedProjects.map((project: any) => (
                   <div key={project.id} className={styles.projectCard}>
                     {project.imageUrl ? (
                       <div className={styles.projectImageWrapper}>
@@ -242,7 +328,7 @@ export default async function Home() {
         </section>
 
         {/* CUSTOM SECTIONS */}
-        {customSections.map((section, index) => (
+        {customSections.map((section: any, index: number) => (
           <section
             key={section.id}
             className={`section ${index % 2 === 0 ? 'glass' : ''}`}
@@ -252,7 +338,7 @@ export default async function Home() {
                 <div className={styles.aboutContent} style={{ direction: 'ltr' }}>
                   <h2 className={styles.sectionTitle}>{section.title}</h2>
                   <div className={styles.customContent}>
-                    {section.content.split('\n').map((para, i) => (
+                    {section.content.split('\n').map((para: string, i: number) => (
                       <p key={i}>{para}</p>
                     ))}
                   </div>
@@ -281,7 +367,7 @@ export default async function Home() {
             <RevealOnScroll className="container">
               <h2 className={`${styles.sectionTitle} ${styles.textCenter}`}>Apa Kata Mereka?</h2>
               <div className={styles.servicesGrid}>
-                {approvedReviews.map((review) => (
+                {approvedReviews.map((review: any) => (
                   <div key={review.id} className={styles.serviceCard}>
                     <div style={{ color: '#f59e0b', fontSize: '1.1rem', marginBottom: '0.5rem', display: 'flex', gap: '2px' }}>
                       {[...Array(5)].map((_, i) => (

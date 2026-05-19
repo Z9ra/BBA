@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
-
 const prismaClientSingleton = () => {
   const adapter = new PrismaMariaDb({
     host: process.env.DB_HOST || 'localhost',
@@ -8,7 +7,8 @@ const prismaClientSingleton = () => {
     password: process.env.DB_PASSWORD || 'Sitamvan07!',
     database: process.env.DB_NAME || 'bba_db',
     port: parseInt(process.env.DB_PORT || '3306'),
-    connectionLimit: 5
+    connectionLimit: 5,
+    allowPublicKeyRetrieval: true
   });
 
   return new PrismaClient({ adapter });

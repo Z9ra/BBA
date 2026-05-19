@@ -121,7 +121,7 @@ export default async function AdminDashboard() {
               <Link href="/admin/reviews" className={styles.viewAll}>View All</Link>
             </div>
             <div className={styles.listContainer}>
-              {recentReviews.map((review, idx) => (
+              {recentReviews.map((review: any, idx: number) => (
                 <div key={idx} className={styles.listItem}>
                   <div className={styles.itemInfo}>
                     <strong>{review.name}</strong>
@@ -143,7 +143,7 @@ export default async function AdminDashboard() {
               <Link href="/admin/projects" className={styles.viewAll}>Manage</Link>
             </div>
             <div className={styles.listContainer}>
-              {recentProjects.map((project, idx) => (
+              {recentProjects.map((project: any, idx: number) => (
                 <div key={idx} className={styles.listItem}>
                   <div className={styles.itemInfo}>
                     <strong>{project.name}</strong>
