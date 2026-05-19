@@ -16,6 +16,7 @@ const prismaClientSingleton = () => {
     password: dbUrl.password,
     database: dbUrl.pathname.replace(/^\//, ''),
     connectionLimit: 5,
+    connectTimeout: 20000, // Increase socket connect timeout to 20s for high-latency Vercel-to-TiDB Cloud connection
     allowPublicKeyRetrieval: true,
     // Enable SSL for TiDB Cloud
     ssl: isTiDB ? { minVersion: 'TLSv1.2' } : undefined,
