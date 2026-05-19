@@ -1,6 +1,8 @@
 import styles from '../admin.module.css';
 import prisma from '@/lib/prisma';
 import ProjectsTable from './ProjectsTable';
+export const dynamic = 'force-dynamic';
+
 
 export default async function ProjectsPage() {
   const projects = await prisma.project.findMany({

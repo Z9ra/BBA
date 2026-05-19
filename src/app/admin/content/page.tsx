@@ -5,6 +5,8 @@ import TextContentForm from './TextContentForm';
 import StaticImagesForm from './StaticImagesForm';
 import DynamicContentForm from './DynamicContentForm';
 import { getSettings } from '@/lib/settings';
+export const dynamic = 'force-dynamic';
+
 
 export default async function EditContentPage() {
   const settings = await getSettings();
